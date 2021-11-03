@@ -1,0 +1,19 @@
+﻿body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+content {
+    margin: auto 0;
+}
+
+.nav-color {
+    color: rgba(255, 0, 255, 0.5)
+}
+
+footer {
+    clear: both;
+    position: relative;
+    height: 200px;
+}
