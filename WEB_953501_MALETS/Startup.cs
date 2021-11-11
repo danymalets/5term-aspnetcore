@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WEB_953501_MALETS.Data;
+using WEB_953501_MALETS.Entities;
+using WEB_953501_MALETS.Data;
 
 namespace WEB_953501_MALETS
 {
@@ -32,14 +34,40 @@ namespace WEB_953501_MALETS
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
+            
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = false;
+                })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
+            services.AddAuthorization();
+            
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app,
+            IWebHostEnvironment env,
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -59,7 +87,9 @@ namespace WEB_953501_MALETS
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
+            DbInitializer.Seed(context, userManager, roleManager).Wait();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
