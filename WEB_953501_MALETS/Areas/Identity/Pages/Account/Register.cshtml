@@ -8,7 +8,8 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">>
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+            >
             <h4>Create a new account.</h4>
             <hr/>
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -69,4 +70,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial"/>
+    <script src="~/lib/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
+    <script>
+    $(document).ready(function() {
+    bsCustomFileInput.init()
+    })
+    </script>
 }
