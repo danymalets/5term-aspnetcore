@@ -24,9 +24,8 @@ namespace WEB_953501_MALETS
                 })
                 .ConfigureLogging(lp =>
                 {
-                    lp.ClearProviders();
-                    lp.AddFilter("Microsoft", LogLevel.None);
-
+                    lp.AddFilter("Microsoft", LogLevel.Error);
+                    lp.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.None);
                 });
     }
 }

@@ -32,7 +32,7 @@ namespace WEB_953501_MALETS.Controllers
             var groupName = group.HasValue
                 ? _context.DishGroups.Find(group.Value)?.GroupName
                 : "all groups";
-            _logger.LogInformation($"info: group={groupName}, page={pageNo}");
+            //_logger.LogInformation($"info: group={groupName}, page={pageNo}");
             var dishesFiltered = _context.Dishes.Where(d => !group.HasValue || d.DishGroupId == group.Value);
             ViewData["Groups"] = _context.DishGroups;
             ViewData["CurrentGroup"] = group ?? 0;

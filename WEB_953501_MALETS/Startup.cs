@@ -19,6 +19,7 @@ using WEB_953501_MALETS.Data;
 using WEB_953501_MALETS.Models;
 using WEB_953501_MALETS.Services;
 using Serilog.Extensions.Logging.File;
+using WEB_953501_MALETS.Extensions;
 
 namespace WEB_953501_MALETS
 {
@@ -113,6 +114,8 @@ namespace WEB_953501_MALETS
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+            
+            app.UseFileLogging();
         }
     }
 }
