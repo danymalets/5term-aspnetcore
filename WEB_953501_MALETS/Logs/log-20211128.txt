@@ -43,4 +43,4 @@
 2021-11-28T12:58:54.8338070+03:00  [INF] Request /Images/%D0%A1%D1%83%D0%BF.jpg returns status code 404 (48339f9b)
 2021-11-28T12:59:14.4336070+03:00  [INF] Request /Images/%D0%9A%D0%BE%D0%BC%D0%BF%D0%BE%D1%82.jpg returns status code 404 (a0e91b20)
 2021-11-28T12:59:14.4398110+03:00  [INF] Request /Images/%D0%9C%D0%B0%D0%BA%D0%B0%D1%80%D0%BE%D0%BD%D1%8B.jpg returns status code 404 (8f5f6297)
-2021-11-28T12:59:14.4418440+03:00  [INF] Request /Images/%D0%9A%D0%BE%D1%82%D0%BB%D0%B5%D1%82%D0%B0.jpg returns status code 404 (ec120de0)
+2021-11-28T12:59:14.4418440+03:00  [INF] Request /Images/%D0%9A%D0%BE%D1%82%D0%BB%D0%B5%D1%82%D0%B0.jpg returns status code 404 (ec120de0)2021-11-28T15:01:12.1814380+03:00  [INF] Application is shutting down... (90f52c38)
