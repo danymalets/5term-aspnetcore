@@ -13,10 +13,29 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="1.0.0-dev-00002" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages" />
+    <Content Include="Scripts\bs-custom-file-input.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Scripts\bs-custom-file-input.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <DependentUpon>bs-custom-file-input.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\bs-custom-file-input.min.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <DependentUpon>bs-custom-file-input.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\bs-custom-file-input.min.js.map">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <DependentUpon>bs-custom-file-input.js</DependentUpon>
+    </Content>
   </ItemGroup>
 
 </Project>

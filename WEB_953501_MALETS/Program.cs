@@ -21,6 +21,12 @@ namespace WEB_953501_MALETS
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                })
+                .ConfigureLogging(lp =>
+                {
+                    lp.ClearProviders();
+                    lp.AddFilter("Microsoft", LogLevel.None);
+
                 });
     }
 }

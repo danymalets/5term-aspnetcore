@@ -11,9 +11,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using WEB_953501_MALETS.Data;
 using WEB_953501_MALETS.Entities;
 using WEB_953501_MALETS.Data;
+using WEB_953501_MALETS.Models;
+using WEB_953501_MALETS.Services;
+using Serilog.Extensions.Logging.File;
 
 namespace WEB_953501_MALETS
 {
@@ -60,6 +65,14 @@ namespace WEB_953501_MALETS
                 options.LoginPath = $"/Identity/Account/Login";
                 options.LogoutPath = $"/Identity/Account/Logout";
             });
+            services.AddDistributedMemoryCache();
+            services.AddSession(opt =>
+            {
+                opt.Cookie.HttpOnly = true;
+                opt.Cookie.IsEssential = true;
+            });
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<Cart>(sp=>CartService.GetCart(sp));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,8 +80,10 @@ namespace WEB_953501_MALETS
             IWebHostEnvironment env,
             ApplicationDbContext context,
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ILoggerFactory logger)
         {
+            logger.AddFile("Logs/log-{Date}.txt");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -87,6 +102,7 @@ namespace WEB_953501_MALETS
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
             
             DbInitializer.Seed(context, userManager, roleManager).Wait();
             
